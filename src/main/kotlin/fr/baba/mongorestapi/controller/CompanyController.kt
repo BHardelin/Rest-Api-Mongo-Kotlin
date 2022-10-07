@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,7 +22,12 @@ class CompantController(
     fun createCompany(@RequestBody request: CompanyRequest): ResponseEntity<CompanyResponse> {
         val createdCompany = companyService.createCompany(request)
 
-        return ResponseEntity.ok(createdCompany?.let { CompanyResponse.fromEntity(it) })
+        return ResponseEntity
+            .ok(
+                createdCompany?.let {
+                    CompanyResponse.fromEntity(it)
+                }
+            )
     }
 
     @GetMapping
@@ -38,6 +44,16 @@ class CompantController(
         return ResponseEntity
             .ok(
                 CompanyResponse.fromEntity(company)
+            )
+    }
+
+    @PutMapping("/{id}")
+    fun updateCompany(@PathVariable id: String, @RequestBody request: CompanyRequest) : ResponseEntity<CompanyResponse> {
+        val updatedCompany = companyService.updateCompany(id, request)
+
+        return ResponseEntity
+            .ok(
+                updatedCompany?.let { CompanyResponse.fromEntity(it) }
             )
     }
 }
