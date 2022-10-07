@@ -45,6 +45,10 @@ class CompanyService(
             )
         }
 
+        if (updateCompany != null) {
+            updateCompanyEmployees(updateCompany)
+        }
+
         return updateCompany
     }
 
@@ -52,6 +56,17 @@ class CompanyService(
         val companyToDelete = findById(id)
 
          companyRepository.delete(companyToDelete)
+    }
+
+    private fun updateCompanyEmployees(updatedCompany: Company) {
+        employeeRepository.saveAll(
+            employeeRepository.findByCompanyId(updatedCompany.id!!)
+                .map {
+                    it.apply {
+                        updatedCompany
+                    }
+                }
+        )
     }
 
 }

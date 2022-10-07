@@ -8,4 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
 interface EmployeeRepository : MongoRepository<Employee, ObjectId> {
 
     fun findByCompanyId(id: String): List<Company>
+    abstract fun saveAll(findByCompanyId: List<Company>)
 }
