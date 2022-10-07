@@ -55,4 +55,10 @@ class EmployeeService(
         )
     }
 
+    fun deleteById(id: ObjectId) {
+        val employeeToDelete = findById(id)
+
+        employeeRepository.delete(employeeToDelete)
+    }
+
 }
