@@ -36,9 +36,23 @@ class EmployeeService(
         return employeeRepository.findByCompanyId(id)
     }
 
-    fun findById(id: ObjectId): Employee? {
+    fun findById(id: ObjectId): Employee {
         return employeeRepository.findById(id)
             .orElseThrow{ NotFoundException("Employee with id $id not found") }
+    }
+
+    fun updateEmployee(id: ObjectId, request: EmployeeRequest): Employee {
+        val employeeToUpdate: Employee = findById(id)
+        val foundCompany: Company? = request.companyId?.let { companyService.findById(it) }
+
+        return employeeRepository.save(
+            employeeToUpdate.apply {
+                firstName = request.firstName
+                lastName = request.lastName
+                email = request.email
+                company = foundCompany
+            }
+        )
     }
 
 }
