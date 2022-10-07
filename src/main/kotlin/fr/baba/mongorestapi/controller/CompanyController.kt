@@ -4,6 +4,7 @@ import fr.baba.mongorestapi.response.CompanyResponse
 import fr.baba.mongorestapi.service.request.CompanyRequest
 import fr.baba.mongorestapi.service.servcie.CompanyService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,6 +23,12 @@ class CompantController(
         return ResponseEntity.ok(createdCompany?.let { CompanyResponse.fromEntity(it) })
     }
 
+    @GetMapping
+    fun findAllCompanies(): ResponseEntity<List<CompanyResponse>> {
+        val companies = companyService.findAll()
+
+        return ResponseEntity.ok(companies.map { CompanyResponse.fromEntity(it) })
+    }
 
 
 }
