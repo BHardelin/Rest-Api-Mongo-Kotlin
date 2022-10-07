@@ -1,4 +1,4 @@
-package fr.baba.mongorestapi.service
+package fr.baba.mongorestapi.service.companyrequest
 
 class CompanyRequest {
 
