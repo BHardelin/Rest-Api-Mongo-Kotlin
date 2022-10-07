@@ -40,6 +40,4 @@ class CompantController(
                 CompanyResponse.fromEntity(company)
             )
     }
-
-
 }
