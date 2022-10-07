@@ -33,4 +33,19 @@ class CompanyService(
         return companyRepository.findById(id).orElseThrow{NotFoundException("Company with id: $id not found")}
     }
 
+    fun updateCompany(id: String, request: CompanyRequest): Company? {
+        val companyToUpdate = findById(id)
+        var updateCompany: Company? = null
+        if(request.name != null && request.address != null) {
+            updateCompany = companyRepository.save(
+                companyToUpdate.apply {
+                    name = request.name
+                    address = request.address
+                }
+            )
+        }
+
+        return updateCompany
+    }
+
 }
