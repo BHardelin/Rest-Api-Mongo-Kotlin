@@ -4,6 +4,7 @@ import fr.baba.mongorestapi.response.CompanyResponse
 import fr.baba.mongorestapi.service.request.CompanyRequest
 import fr.baba.mongorestapi.service.servcie.CompanyService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -48,12 +49,19 @@ class CompantController(
     }
 
     @PutMapping("/{id}")
-    fun updateCompany(@PathVariable id: String, @RequestBody request: CompanyRequest) : ResponseEntity<CompanyResponse> {
+    fun updateCompany(@PathVariable id: String, @RequestBody request: CompanyRequest): ResponseEntity<CompanyResponse> {
         val updatedCompany = companyService.updateCompany(id, request)
 
         return ResponseEntity
             .ok(
                 updatedCompany?.let { CompanyResponse.fromEntity(it) }
             )
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteCompany(@PathVariable id: String): ResponseEntity<Void> {
+        companyService.deleteById(id)
+
+        return ResponseEntity.noContent().build()
     }
 }
