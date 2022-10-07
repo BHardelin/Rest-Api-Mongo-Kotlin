@@ -1,4 +1,4 @@
-package fr.baba.mongorestapi.service.employeerequest
+package fr.baba.mongorestapi.service.request
 
 class EmployeeRequest(
     val firstName: String,

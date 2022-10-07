@@ -1,11 +1,10 @@
-package fr.baba.mongorestapi.service.employeeservice
+package fr.baba.mongorestapi.service.servcie
 
 import fr.baba.mongorestapi.exception.NotFoundException
 import fr.baba.mongorestapi.model.Company
 import fr.baba.mongorestapi.model.Employee
 import fr.baba.mongorestapi.repository.EmployeeRepository
-import fr.baba.mongorestapi.service.companyservice.CompanyService
-import fr.baba.mongorestapi.service.employeerequest.EmployeeRequest
+import fr.baba.mongorestapi.service.request.EmployeeRequest
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
