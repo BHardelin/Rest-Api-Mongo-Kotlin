@@ -48,4 +48,10 @@ class CompanyService(
         return updateCompany
     }
 
+    fun deleteById(id: String) {
+        val companyToDelete = findById(id)
+
+         companyRepository.delete(companyToDelete)
+    }
+
 }
